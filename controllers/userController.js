@@ -100,11 +100,11 @@ export const changePassword = catchAsyncError(async (req, res, next) => {
 export const updateProfile = catchAsyncError(async (req, res, next) => {
 
   const {name , email}  = req.body;
-  
+ 
 
   const user = await User.findById(req.user._id)
   if(name) user.name = name;
-  if(email) user.name = email;
+  if(email) user.email = email;
   
 
  await user.save(); 
