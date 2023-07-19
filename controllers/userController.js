@@ -151,7 +151,7 @@ await sendEmail(user.email , "Resent Password" , message)
 
   res.status(200).json({
     success: true,
-    message:`Reset Token has been sent to ${resetToken}`
+    message:`Reset Token has been sent to ${user.email}`
   })
 })
 export const resetPassword = catchAsyncError(async (req , res , next)=>{
