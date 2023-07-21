@@ -31,6 +31,9 @@ export const createCourse = catchAsyncError(async (req, res, next) => {
   }
 
   const file = req.file;
+  if (!file || !file.originalname) {
+    return next(new ErrorHandler("Please upload a valid file", 400));
+  }
 
   const fileUri = getDataUri(file);
 
@@ -46,6 +49,8 @@ export const createCourse = catchAsyncError(async (req, res, next) => {
       url: mycloud.secure_url,
     },
   });
+
+
 
   res.status(201).json({
     success: true,
