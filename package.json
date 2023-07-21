@@ -2,11 +2,11 @@
   "name": "coursestartupserver",
   "version": "1.0.0",
   "description": "",
-  "type":"module",
+  "type": "module",
   "main": "server.js",
   "scripts": {
     "dev": "nodemon server.js",
-    "start":"node server.js"
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
@@ -26,7 +26,6 @@
     "razorpay": "^2.9.0",
     "validator": "^13.9.0"
   },
-  
   "engines": {
     "node": ">=14.20.1"
   }

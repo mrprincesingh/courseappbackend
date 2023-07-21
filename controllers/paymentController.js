@@ -34,19 +34,25 @@ export const paymentVerification = catchAsyncError(async (req, res, next) => {
   const { razorpay_signature, razorpay_payment_id, razorpay_subscription_id } =
     req.body;
 
-  let user = await User.findById(req.user._id);
+    console.log("Payment Verification Request Received");
+    console.log("Request Body:", req.body);
+
+  const user = await User.findById(req.user._id);
    
-  let subscription_id = user.subscription.id;
+  const subscription_id = user.subscription.id;
 
   const generated_signature = crypto
     .createHmac("sha256", process.env.RAZORPAY_API_SECRET)
     .update(razorpay_payment_id + "|" + subscription_id, "utf-8")
     .digest("hex");
 
-  let isAuthentic = generated_signature === razorpay_signature;
-
-  if (!isAuthentic)
-    return res.redirect(`${process.env.FRONTEND_URL}/paymentfail`);
+  const isAuthentic = generated_signature === razorpay_signature;
+  console.log("isAuthentic:", isAuthentic);
+  if (!isAuthentic){
+    console.log("Payment Verification Failed");
+      return res.redirect(`${process.env.FRONTEND_URL}/paymentfail`);
+  }
+  
 
   // database comes here
   await Payment.create({
@@ -56,9 +62,9 @@ export const paymentVerification = catchAsyncError(async (req, res, next) => {
   });
 
   user.subscription.status = "active";
-  console.log(user);
+  
   await user.save();
-
+  console.log("Payment Verification Successful");
   res.redirect(
     `${process.env.FRONTEND_URL}/paymentsuccess?reference=${razorpay_payment_id}`
   );
@@ -83,24 +89,34 @@ export const cancelSubscription = catchAsyncError(async (req, res, next) => {
     razorpay_subscription_id: subscriptionId,
   });
 
-  const gap = Date.now() - payment.createdAt;
-
-  const refundTime = process.env.REFUND_DAYS * 24 * 60 * 60 * 1000;
-
-  if (refundTime > gap) {
-    await instance.payments.refund(payment.razorpay_payment_id);
-    refund = true;
+  if (!payment) {
+    return res.status(400).json({ success: false, message: "Payment not found for the subscription." });
   }
 
-  await Payment.deleteOne({ _id: payment._id });
-  user.subscription.id = undefined;
-  user.subscription.status = undefined;
-  await user.save();
+  const gap = Date.now() - payment.createdAt;
+  const refundTime = process.env.REFUND_DAYS * 24 * 60 * 60 * 1000;
 
-  res.status(200).json({
-    success: true,
-    message: refund
-      ? "Subscription cancelled, You will receive full refund within 7 days."
-      : "Subscription cancelled, Now refund initiated as subscription was cancelled after 7 days.",
-  });
+  try {
+    if (refundTime > gap) {
+      await instance.payments.refund(payment.razorpay_payment_id);
+      refund = true;
+    }
+
+    await Payment.deleteOne({ _id: payment._id });
+    // Using Mongoose's unset method to remove fields
+    user.subscription.id = undefined;
+    user.subscription.status = undefined;
+    await user.save();
+
+    res.status(200).json({
+      success: true,
+      message: refund
+        ? "Subscription cancelled. You will receive a full refund within 7 days."
+        : "Subscription cancelled. Now refund initiated as the subscription was cancelled after 7 days.",
+    });
+  } catch (error) {
+    console.error("Error during cancelSubscription:", error);
+    return res.status(500).json({ success: false, message: "An error occurred while cancelling the subscription." });
+  }
+  
 });
