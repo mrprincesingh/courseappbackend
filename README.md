@@ -10,7 +10,7 @@
 [![Backend Deploy to Render](https://img.shields.io/badge/Backend_Deployed_Render_Link-0A66C2?style=for-the-badge&logo=ko-fi&logoColor=white)](https://courseappbackendd.onrender.com/
 )
 
-[![Frontend Deployed App Vercel Link](https://img.shields.io/badge/Frontend Deployed_App_Vercel_Link-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://coursestartup.vercel.app/)
+[![Frontend Deployed Vercel Link](https://img.shields.io/badge/FrontendDeployed__Vercel_Link-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://coursestartup.vercel.app/)
 
 ---
 
