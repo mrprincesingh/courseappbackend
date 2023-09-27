@@ -180,13 +180,19 @@ CoursePage--> WatchLecturePage
 ## Screenshots 📷
 ---                                     
                                                                                                                           
+           ![Screenshot 2023-09-28 002103](https://github.com/mrprincesingh/courseappbackend/assets/108007506/bcad6646-9248-43a7-8552-9aba101d0fa3)
+                                                                                                               
+        ![Screenshot 2023-09-28 002237](https://github.com/mrprincesingh/courseappbackend/assets/108007506/56fce3c4-3d90-4b19-9a1a-8e28ec6f85f7)
+                                                                                                             
+           ![Screenshot 2023-09-28 002317](https://github.com/mrprincesingh/courseappbackend/assets/108007506/11a7bc4d-1f8d-4367-a6ec-be6b689b10df)
+                                                                                                               
+          ![Screenshot 2023-09-28 002600](https://github.com/mrprincesingh/courseappbackend/assets/108007506/fb82e79c-af64-404f-b48b-4c57b878be40)
+                                                                                                                
+                                                                                                    ![Screenshot 2023-09-28 002728](https://github.com/mrprincesingh/courseappbackend/assets/108007506/c2e018f1-9f0e-4ec4-b0a2-bd7f193244a1)
+                      
                                                                                                                           
-                                                                                                                     
-                                                                                                                          
-                                                                                                                          
-                                                                                                                          
-                                                                                                                          
-                                                                                                                          
+                                                                                                    ![Screenshot 2023-09-28 002803](https://github.com/mrprincesingh/courseappbackend/assets/108007506/870bf61f-efbf-4735-91f6-0ef2ffd6ab29)
+                      
 
 ---
 
